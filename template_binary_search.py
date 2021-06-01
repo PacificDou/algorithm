@@ -27,9 +27,7 @@ def binarySearchFirst(array, key):
         if array[mid] == key:
             idx = mid
             right = mid - 1
-            if left <= right and array[right] == key:
-                continue
-            else:
+            if not (left <= right and array[right] == key):
                 break
         if array[mid] < key:
             left = mid + 1
@@ -49,9 +47,7 @@ def binarySearchLast(array, key):
         if array[mid] == key:
             idx = mid
             left = mid + 1
-            if left <= right and array[left] == key:
-                continue
-            else:
+            if not (left <= right and array[left] == key):
                 break
         if array[mid] < key:
             left = mid + 1
