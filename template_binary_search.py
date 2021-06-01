@@ -27,6 +27,9 @@ def binarySearchFirst(array, key):
         if array[mid] == key:
             idx = mid
             right = mid - 1
+            # these two lines can also be removed, but will be less efficient
+            if not (left <= right and array[right] == key):
+                break
         elif array[mid] < key:
             left = mid + 1
         elif array[mid] > key:
@@ -45,6 +48,9 @@ def binarySearchLast(array, key):
         if array[mid] == key:
             idx = mid
             left = mid + 1
+            # these two lines can also be removed, but will be less efficient
+            if not (left <= right and array[left] == key):
+                break
         elif array[mid] < key:
             left = mid + 1
         elif array[mid] > key:
