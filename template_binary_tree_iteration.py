@@ -49,6 +49,7 @@ def postorderWalk(root, ret):
     stack = [root, root]
     while len(stack) > 0:
         node = stack.pop()
+        # expand children of node
         if len(stack) > 0 and node == stack[-1]:
             if node.right is not None:
                 stack.append(node.right)
@@ -62,8 +63,43 @@ def postorderWalk(root, ret):
     return ret
 
 
+# modified from https://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/
+def postorderWalk_v2(root, ret):
+    if root is None:
+        return
+
+    stack = [root]
+    while len(stack) > 0:
+
+        node = stack[-1]
+        if stack[-1].right is not None:
+            stack.pop()
+            stack.append(node.right)
+            stack.append(node)
+
+        while node.left is not None:
+            if node.left.right is not None:
+                stack.append(node.left.right)
+            stack.append(node.left)
+            node = stack[-1]
+
+        while len(stack) > 0:
+            node = stack.pop()
+            # if right child has not been visited yet
+            if len(stack) > 0 and node.right == stack[-1]:
+                stack.pop()
+                stack.append(node)
+                stack.append(node.right)
+                break
+            else:
+                ret.append(node.val)
+
+    return ret
+
+
 if __name__ == '__main__':
     root = TreeNode(4, TreeNode(2, TreeNode(1), TreeNode(3)), TreeNode(5, None, TreeNode(6)))
     print('inorder:   ', inorderWalk(root, []))
     print('preorder:  ', preorderWalk(root, []))
     print('postorder: ', postorderWalk(root, []))
+    print('postorder: ', postorderWalk_v2(root, []))
