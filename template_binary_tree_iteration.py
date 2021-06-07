@@ -9,6 +9,22 @@ def inorderWalk(root, ret):
     if root is None:
         return
 
+    stack = [TreeNode('dummy', None, root)]
+    while len(stack) > 0:
+        node = stack.pop().right
+        while node is not None:
+            stack.append(node)
+            node = node.left
+
+        if len(stack) > 0:
+            ret.append(stack[-1].val)
+
+    return ret
+
+def inorderWalk_v2(root, ret):
+    if root is None:
+        return
+
     stack = [root]
     while len(stack) > 0:
         # push left child
@@ -24,6 +40,8 @@ def inorderWalk(root, ret):
                 break
 
     return ret
+
+
 
 def preorderWalk(root, ret):
     if root is None:
@@ -100,6 +118,7 @@ def postorderWalk_v2(root, ret):
 if __name__ == '__main__':
     root = TreeNode(4, TreeNode(2, TreeNode(1), TreeNode(3)), TreeNode(5, None, TreeNode(6)))
     print('inorder:   ', inorderWalk(root, []))
+    print('inorder:   ', inorderWalk_v2(root, []))
     print('preorder:  ', preorderWalk(root, []))
     print('postorder: ', postorderWalk(root, []))
     print('postorder: ', postorderWalk_v2(root, []))
