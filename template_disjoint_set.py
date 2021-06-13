@@ -20,7 +20,7 @@ def Find(node):
     while p.p != p:
         p = p.p
 
-    while node.p != p:
+    while node != p:
         temp = node.p
         node.p = p
         node = temp
@@ -52,8 +52,8 @@ if __name__ == '__main__':
     for node in nodes.values():
         p = node.p
         if p not in sets:
-            sets[p] = []
-        sets[p].append(node)
+            sets[p] = set()
+        sets[p].add(node)
 
     for p, set in sets.items():
-        print('Set  {} : {}'.format(p.val, [n.val for n in set]))
+        print('Set {} : {}'.format(p.val, [n.val for n in set]))
