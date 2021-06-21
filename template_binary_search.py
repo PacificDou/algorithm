@@ -1,3 +1,4 @@
+# https://www.topcoder.com/thrive/articles/Binary%20Search
 
 
 def binarySearch(array, key):
