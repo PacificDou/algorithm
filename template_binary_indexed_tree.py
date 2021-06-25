@@ -8,10 +8,11 @@ def build(array):
     n = len(array)
     bit = [0 for i in range(n + 1)]
     for i, num in enumerate(array):
-        bit[i + 1] += array[i]
-        j = i + 1 + lowbit(i + 1)
+        idx = i + 1
+        bit[idx] += array[i] # bit[idx] is done
+        j = idx + lowbit(idx)
         if j <= n:
-            bit[j] += bit[i + 1]
+            bit[j] += bit[idx] # propagate bit[idx] to parent nodes, very important!!!
     return bit
 
 def update(bit, idx, val):
